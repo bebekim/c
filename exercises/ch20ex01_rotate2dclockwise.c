@@ -1,9 +1,10 @@
 //
 //  main.c
-//  Programming
+//  c
 //
-//  Created by 김영하 on 12/7/13.
-//  Copyright (c) 2013 Student. All rights reserved.
+//  Created by 김영하 on 12/13/13.
+//  Copyright (c) 2013 student. All rights reserved.
+//
 //  ch 20 도전! 프로그래밍3
 //  도전 1 : 2차원 배열의 요소들을 90도씩 이동시켜 결과를 출력하는 프로그램
 
@@ -11,31 +12,35 @@
 #define LEN 4
 
 void showarr(int (*ptread)[LEN]);
-void rotclockarr(int (*ptread)[LEN], int (*ptwrite)[LEN]);
+void copyarr(int (*ptread)[LEN], int (*ptcopy)[LEN]);
+void rotclockarr(int (*ptr)[LEN]);
 
 int main(int argc, const char * argv[])
 {
     
-        //3시간 동안 뻘짓한 이유 : int arr[4][4] = {(1, 2, 3, 4}, ...} 2d array 에서는 {{}, {}, {}} NOT {(), (), ()}
-        //pay attention to bracket
-    int arr2d[LEN][LEN] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
-    int copy2d[LEN][LEN] = {0};
-    int (*ptr1)[LEN] = arr2d; //a pointer to int type, which increases value by sizeof(int) x LEN
-    int (*ptr2)[LEN] = copy2d;
-        //show arr2d itself
-    showarr(ptr1);
-        //rotate arr2d clockwise once
-    rotclockarr(ptr1, ptr2);
+    int arr2d[LEN][LEN] = {{1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 10, 11, 12},
+        {13, 14, 15, 16}};  //why I wasted a good 3 hours at least
+                            //I tried {(), (), ()} instead of {{}, {}, {}}. Pay attention to bracket
     
-        //reset pointers
+    int (*ptr1)[LEN] = arr2d; //a pointer to int type, which increases value by sizeof(int) x LEN
+                              //show arr2d itself
+    printf("The original: \n");
+    showarr(ptr1);
+    
+        //rotate arr2d clockwise once
+    rotclockarr(ptr1);
+    showarr(ptr1);
     
         //rotate arr2d clockwise once more (twice in total)
+    rotclockarr(ptr1);
+    showarr(ptr1);
     
         //rotate arr2d clockwise once more (thrice in total)
+    rotclockarr(ptr1);
+    showarr(ptr1);
     
-        //show and confirm arr2d clockwise rotation
-    showarr(ptr2);
-
     return 0;
     
 }
@@ -44,26 +49,41 @@ int main(int argc, const char * argv[])
 void showarr(int (*ptread)[LEN])
 {
     int i, j;
-    
     for (i = 0; i < LEN; i++)
         {
         for (j = 0; j < LEN; j++)
             {
-                printf("%2d ", ptread[i][j]);
+            printf("%2d ", ptread[i][j]);
             }
         printf("\n");
         }
     printf("\n");
 }
 
-void rotclockarr(int (*ptread)[LEN], int (*ptwrite)[LEN])
+void copyarr(int (*ptread)[LEN], int (*ptcopy)[LEN])
+{
+    int i, j;
+    for (i = 0; i < LEN; i++)
+        {
+        for (j = 0; j < LEN; j++)
+            {
+            ptcopy[i][j]=ptread[i][j];
+            }
+        }
+}
+
+void rotclockarr(int (*ptr)[LEN])
 {
     int i, j; //for loop counters
-              //create a temporary
+              //how do I create an exact replica?
+
+    int copy2d[LEN][LEN]; //declare a 2d array to create an exact copy of original
+    int (*copyptr)[LEN] = copy2d;
+    copyarr(ptr, copyptr);
     
     for (j = 0; j < LEN; j++)
         {
-            for (i = 0; i < LEN; i++)
-                ptwrite [i][(LEN-1)-j] = ptread[j][i];
+        for (i = 0; i < LEN; i++)
+            ptr [i][(LEN-1)-j] = copyptr[j][i];
         }
 }
