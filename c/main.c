@@ -17,7 +17,7 @@ void rotclockarr(int (*ptr)[LEN]);
 
 int main(int argc, const char * argv[])
 {
-    
+    int count = 0;
     int arr2d[LEN][LEN] = {{1, 2, 3, 4},
         {5, 6, 7, 8},
         {9, 10, 11, 12},
@@ -29,17 +29,13 @@ int main(int argc, const char * argv[])
     printf("The original: \n");
     showarr(ptr1);
     
-        //rotate arr2d clockwise once
-    rotclockarr(ptr1);
-    showarr(ptr1);
-    
-        //rotate arr2d clockwise once more (twice in total)
-    rotclockarr(ptr1);
-    showarr(ptr1);
-    
-        //rotate arr2d clockwise once more (thrice in total)
-    rotclockarr(ptr1);
-    showarr(ptr1);
+    while (count < 3)
+        {
+        printf("rotation #%d : \n", count+1);
+        rotclockarr(ptr1);
+        showarr(ptr1);
+        count++;
+        }
     
     return 0;
     
