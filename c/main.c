@@ -6,80 +6,103 @@
 //  Copyright (c) 2013 student. All rights reserved.
 //
 //  ch 20 도전! 프로그래밍3
-//  도전 1 : 2차원 배열의 요소들을 90도씩 이동시켜 결과를 출력하는 프로그램
+//  도전 2 : 달팽이 모양의 배열을 만들어서 이를 출력하는 프로그램 (
+//  2d array 크기를 input 받으면 (예를 들어서 5)
+//  1   2   3   4   5
+//  16  17  18  19  6
+//  15  24  25  20  7
+//  14  23  22  21  8
+//  13  12  11  10  9
+//  write in (row -> column -> inverted row -> inverted column -> row -> column...)
+
+    //현재 내가 어려움 겪고 있는 부분
 
 #include <stdio.h>
-#define LEN 4
+#define N 4
 
-void showarr(int (*ptread)[LEN]);
-void copyarr(int (*ptread)[LEN], int (*ptcopy)[LEN]);
-void rotclockarr(int (*ptr)[LEN]);
+    //void writearr (int *ptr[s], int* pci);
+void writearr (int (*ptr)[N]);
+void showarr(int (*ptr)[N]);
+    //void copyarr(int (*ptread)[size], int (*ptcopy)[size]);
+    //void rotclockarr(int (*ptr)[size]);
 
 int main(int argc, const char * argv[])
 {
-    int count = 0;
-    int arr2d[LEN][LEN] = {{1, 2, 3, 4},
-        {5, 6, 7, 8},
-        {9, 10, 11, 12},
-        {13, 14, 15, 16}};  //why I wasted a good 3 hours at least
-                            //I tried {(), (), ()} instead of {{}, {}, {}}. Pay attention to bracket
+    /*
+    int s;
+    int* const pci = &s; //constant pointer to an integer variable
+    printf("Enter the size of the 2d array : ");
+    scanf("%d", pci);
+    */
     
-    int (*ptr1)[LEN] = arr2d; //a pointer to int type, which increases value by sizeof(int) x LEN
-                              //show arr2d itself
-    printf("The original: \n");
-    showarr(ptr1);
+    int array2d[N][N]; //I cannot initialize an array of variable size
+    int (*ptr)[N] = array2d;    //declare a pointer to 2d array
     
-    while (count < 3)
-        {
-        printf("rotation #%d : \n", count+1);
-        rotclockarr(ptr1);
-        showarr(ptr1);
-        count++;
-        }
+        //write to a array2d of varied size
+    writearr(ptr);
+        //row
+        //column
+        //using a function
+   
+    showarr(ptr);
+        //rotate array2d
+        //anti clockwise
     
     return 0;
     
 }
 
-    //display array element one by one
-void showarr(int (*ptread)[LEN])
+
+void writearr (int (*ptr)[N])
 {
     int i, j;
-    for (i = 0; i < LEN; i++)
+    for (i = 0; i < N; i++)
         {
-        for (j = 0; j < LEN; j++)
+        ptr[0][i] = i;
+        }
+    
+}
+    //display array element one by one
+void showarr(int (*ptr)[N])
+{
+    int i, j;
+    for (i = 0; i < N; i++)
+        {
+        for (j = 0; j < N; j++)
             {
-            printf("%2d ", ptread[i][j]);
+            printf("%2d ", ptr[i][j]);
             }
         printf("\n");
         }
     printf("\n");
 }
 
-void copyarr(int (*ptread)[LEN], int (*ptcopy)[LEN])
+/*
+void copyarr(int (*ptread)[size], int (*ptcopy)[size])
 {
     int i, j;
-    for (i = 0; i < LEN; i++)
+    for (i = 0; i < size; i++)
         {
-        for (j = 0; j < LEN; j++)
+        for (j = 0; j < size; j++)
             {
             ptcopy[i][j]=ptread[i][j];
             }
         }
 }
 
-void rotclockarr(int (*ptr)[LEN])
+void rotclockarr(int (*ptr)[size])
 {
     int i, j; //for loop counters
               //how do I create an exact replica?
 
-    int copy2d[LEN][LEN]; //declare a 2d array to create an exact copy of original
-    int (*copyptr)[LEN] = copy2d;
+    int copy2d[size][size]; //declare a 2d array to create an exact copy of original
+    int (*copyptr)[size] = copy2d;
     copyarr(ptr, copyptr);
     
-    for (j = 0; j < LEN; j++)
+    for (j = 0; j < size; j++)
         {
-        for (i = 0; i < LEN; i++)
-            ptr [i][(LEN-1)-j] = copyptr[j][i];
+        for (i = 0; i < size; i++)
+            ptr [i][(size-1)-j] = copyptr[j][i];
         }
 }
+*/
