@@ -15,23 +15,16 @@
 //  13  12  11  10  9
 //  write in (row -> column -> inverted row -> inverted column -> row -> column...)
 
-
-    //this is incomplete
-
-
-    //현재 내가 어려움 겪고 있는 부분 1
+    //현재 내가 어려움 겪고 있는 부분
     //input에 따라 array size 정하기
     //효근이 말로는 dynamic memory allocation 말고는 별 방법 없다고 한다
     //일단은 array size = 5
-
-    //현재 내가 어려움 겪고 있는 부분 2
-    //shellcheck할 때 D=4번 돌려보면서 면밀히 다 확인한 다음에 shell++를 해야하는데, 이럴려면 recursive가 필요하다
 
 #include <stdio.h>
 #define N 5
 #define D 4
 
-void shellcheck(int (*ptr)[N], int *shell); //checks to see how many shells are to be omitted. INCOMPLETE. need recursive
+void shellcheck(int (*ptr)[N], int *shell); //checks to see how many shells are to be omitted
 void showarr(int (*ptr)[N]); //show all the cell values of array2d
 void writehori (int (*ptr)[N], int *ctr, int *shell); //a function to write cell values of array2d
 void copyarr(int (*ptread)[N], int (*ptcopy)[N]); //a function within
@@ -71,7 +64,7 @@ void shellcheck(int (*ptr)[N], int *shell)
         if (ptr[s][s] != 0)
             (*shell)+=1;
         else
-            ; //INCOMPLETE : need recursive
+        ;
 }
 
 
