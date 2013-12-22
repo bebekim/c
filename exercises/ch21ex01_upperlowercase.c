@@ -10,7 +10,7 @@
 
 int main(int argc, const char * argv[])
 {
-    int ch, nter; //we must declare c to be a type big enough to hold any value that getchar returns
+    int ch; //we must declare c to be a type big enough to hold any value that getchar returns
             //char can't be used since c must be big enough to hold EOF in addition to any possible char
             //that's why int is chosen instead of char
     char A = 'A';   //65
@@ -26,8 +26,7 @@ int main(int argc, const char * argv[])
         {
         printf("->");
         ch = getchar();
-        nter = fgetc(stdin);    //this takes away the \n (=10) away from input.
-        
+
             //determine LOWER or UPPER
         if (ch <= z && ch >= a)
             {
