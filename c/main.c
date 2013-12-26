@@ -4,46 +4,36 @@
 //
 //  Created by 김영하 on 12/21/13.
 //  Copyright (c) 2013 student. All rights reserved.
-//
+//  int puts(const char *s);    //automatic follow up with \n
+//  int fputs(const char *s, FILE * stream);    //does not follow up with \n and thus, require manual input
+//  char * gets(char *s);
+//  char * fgets(char *s, int n, FILE *stream);
 
 #include <stdio.h>
 
+void ClearLineFromReadBuffer (void);
+
 int main(int argc, const char * argv[])
 {
-    int ch, nter; //we must declare c to be a type big enough to hold any value that getchar returns
-            //char can't be used since c must be big enough to hold EOF in addition to any possible char
-            //that's why int is chosen instead of char
-    char A = 'A';   //65
-    char Z = 'Z';   //90
-    char a = 'a';   //97
-    char z = 'z';   //122
-    int change;
-    const int UPPER = z-Z;  //make upper case ,change from z to Z
-    const int LOWER = Z-z;  //make lower case, change from Z to z
-
-        //get value, verify value
-    while (1)
-        {
-        printf("->");
-        ch = getchar();
-        nter = fgetc(stdin);    //this takes away the \n (=10) away from input.
-        
-            //determine LOWER or UPPER
-        if (ch <= z && ch >= a)
-            {
-            change = LOWER; //make LOWER,change from Z to z
-            break;
-            }
-        else if (ch <= Z && ch >= A)
-            {
-            change = UPPER; //make UPPER, change from z to Z
-            break;
-            }
-        else
-            ;
-        }
-    putchar(ch+change);
-    printf("\nEnd of Program\n");
+    char perID[7];
+    char name[10];
+    
+    fputs("주민번호 앞 6자리 입력 : ", stdout);  //remember, fputs automatically follows up with by \n
+    fgets (perID, sizeof(perID), stdin);    //accepts 6 = 7-1(=\n) characters. user's \n enter is
+    ClearLineFromReadBuffer();  //this clears the input buffer
+    
+    fputs("이름 입력 : ", stdout);  //stdout stream still contains the remaining \n single character
+    fgets(name, sizeof(name), stdin);   //this is tored in name, sizeof(1), stdin
+    
+    printf("주민번호 : %s \n", perID);
+    printf("이름 : %s\n", name);
     
     return 0;
+}
+
+void ClearLineFromReadBuffer (void)
+{
+    
+    while (getchar()!='\n') // 이는 \n 만날 때까지 입력버퍼에 저장된 문자들을 char으로 계속 읽어낸다. 별도로 저장하지는 않는다.
+        ;
 }
