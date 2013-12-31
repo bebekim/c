@@ -30,7 +30,7 @@ while (str[i]!='\n')
     {
         //    sum+= atoi(&str[
     char c = str[i];
-    sum +=  atoi(&c);   //the simple trick here is that atoi function converts number character into actual numbers, while converting characters to 0.
+    sum +=  atoi(&c);
     i++;
     }
     
